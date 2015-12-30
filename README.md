@@ -78,5 +78,9 @@ make
 
 In order to obtain the *NIX manual for this program ```make manual```
 
+##See it in action
+
+[![asciicast](https://asciinema.org/a/32728.png)](https://asciinema.org/a/32728)
+
 ##LICENSE
 ###MIT
