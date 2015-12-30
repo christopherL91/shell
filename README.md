@@ -1,5 +1,9 @@
-This is a simple *NIX shell written in ANSI C for the course ID2200 Operating systems.
 
+![unix](https://static.flickr.com/87/240803829_9212773615_o.png "here's a nickel kid")
+
+##About
+
+This is a simple *NIX shell written in ANSI C for the course ID2200 Operating systems.
 
 ##Task
 
