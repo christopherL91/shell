@@ -15,16 +15,16 @@ void execute(char** tokens) {
     char* cmd;
     int status;
 
-    if((pid = fork()) == 0) { /* Child */ 
+    if((pid = fork()) == 0) { /* Child */
         cmd = tokens[0];
         if(execvp(cmd, tokens) == -1) {
             fprintf(stderr, "Unknown command: %s\n", tokens[0]);
-			exit(EXIT_FAILURE); 
+			exit(EXIT_FAILURE);
         }
     } else if(pid < 0) { /* Error */
         fprintf(stderr, "fork: forking child process failed.\n");
 		exit(EXIT_FAILURE);
-    } else { /* Parent */ 
+    } else { /* Parent */
         waitpid(pid, &status, WUNTRACED | WCONTINUED);
     }
 }
@@ -44,9 +44,9 @@ void execute_background(char** tokens) {
             fprintf(stderr, "signal: failed - %s\n", strerror(errno));
             exit(EXIT_FAILURE);
         }
-        
+
         execute(tokens);
-        
+
         if(SIGDET) {
             /*
              * TODO Make this output nicer

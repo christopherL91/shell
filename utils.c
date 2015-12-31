@@ -8,8 +8,9 @@
 
 #include "constants.h"
 
+/*A simple utility to show the reason why a process terminated*/
 void terminate_reason(pid_t pid, int status) {
-    printf("%c[2K", 27); /*Clear current line */
+    printf("%c[2K", 27); /* Clear current line */
     printf("\rPID : %d\nReason: ", pid);
 
     if (WIFEXITED(status)) {
@@ -37,11 +38,13 @@ void *getCurrentDir(char *path){
 
     length = strlen(token);
     directory = malloc(length);
+    /*Don't forget null*/
     memcpy(directory, token+1, length);
 
     return directory;
 }
 
+/*Called before shell exit*/
 void free_tokens(char** tokens) {
     int i;
     for(i = 0; i < MAX_NUM_COMMANDS; i++) {
@@ -50,6 +53,7 @@ void free_tokens(char** tokens) {
     free(tokens);
 }
 
+/*For debugging purposes*/
 void print_tokens(char** tokens) {
     int i;
     for(i = 0; i < MAX_NUM_COMMANDS; i++) {

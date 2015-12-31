@@ -35,9 +35,9 @@ void initial_signal() {
 }
 
 /* Only for SIGCHLD */
-void background_sig_setup() {	
+void background_sig_setup() {
 	struct sigaction sa;
-    
+
     /* We want to recieve all signals by clearing the mask. */
 	if (sigemptyset(&sa.sa_mask) == -1) {
 		fprintf(stderr, "sigemptyset: failed - %s.\n", strerror(errno));

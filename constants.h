@@ -1,11 +1,15 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+/* Shell version specified here */
 #define SHELL_VERSION 0.6
 
+/* Specifies the length of a sub command */
 #define MAX_COMMAND_LENGTH 80
+/* Maximum number of sub commands */
 #define MAX_NUM_COMMANDS 10
 
+/* For the lulz */
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_YELLOW  "\x1b[33m"

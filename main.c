@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* GNU */
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -10,11 +11,11 @@
 
 #define _XOPEN_SOURCE 500
 
-int main(int argc, char *argv[]) {    
+int main() {
     signal(SIGQUIT, SIG_IGN);
     initial_signal();
 
-    while(1) {
+    while(true) {
         char* line = NULL;
         char** tokens = NULL;
         int num_arguments = 0;

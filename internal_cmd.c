@@ -23,10 +23,10 @@ void internal_cmd_env() {
         exit(EXIT_FAILURE);
     }
 
-    if(fork() == 0) {     /* first child */
-        close(1);           /* closing stdout */
-        dup(des_p[1]);      /* replacing stdout with pipe write */
-        close(des_p[0]);    /* closing pipe read */
+    if(fork() == 0) {       /* First child */
+        close(1);           /* Closing stdout */
+        dup(des_p[1]);      /* Replacing stdout with pipe write */
+        close(des_p[0]);    /* Closing pipe read */
         close(des_p[1]);
 
         if(execvp(prog1[0], prog1) == -1) {
@@ -35,10 +35,10 @@ void internal_cmd_env() {
         }
     }
 
-    if(fork() == 0) {
-        close(0);          /*closing stdin*/
-        dup(des_p[0]);     /*replacing stdin with pipe read*/
-        close(des_p[1]);   /*closing pipe write*/
+    if(fork() == 0) {       /*  Second child */
+        close(0);           /*  Closing stdin */
+        dup(des_p[0]);      /*  Replacing stdin with pipe read */
+        close(des_p[1]);    /*  Closing pipe write */
         close(des_p[0]);
 
         if(execvp(prog2[0], prog2) == -1) {
@@ -62,7 +62,7 @@ void internal_cmd_cd(char** tokens) {
     if(strcmp(to, "") == 0) {
         home = getenv("HOME");
         if (chdir(home)) {
-           perror(NULL); 
+           perror(NULL);
         }
     }else {
         if (chdir(to)) {
