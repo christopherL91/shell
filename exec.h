@@ -3,5 +3,6 @@
 
 void execute(char**);
 void execute_background(char**);
+void execute_glob(char**);
 
 #endif

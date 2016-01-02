@@ -103,8 +103,12 @@ void eval(char** tokens, int num_arguments) {
         execute_background(tokens);
     } else {
         gettimeofday(&begin, 0);
-		execute(tokens);
-		gettimeofday(&end, 0);
+		if(tokens[1] != NULL) {
+            execute_glob(tokens);
+        } else{
+            execute(tokens);
+        }
+        gettimeofday(&end, 0);
 		elapsed = (end.tv_sec-begin.tv_sec)*1000000 +
             end.tv_usec-begin.tv_usec;
         printf(ANSI_COLOR_CYAN UNDERSCORE "time: %.3fs\n"
