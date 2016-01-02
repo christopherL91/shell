@@ -1,10 +1,9 @@
 TARGET = shell
 LIBS = -lreadline
 CC = gcc
-CFLAGS = -pedantic -Wall -ansi -O3 -D SIGDET=0
+override CFLAGS += -pedantic -Wall -ansi -O3
 
 .PHONY: default all clean manual
-
 
 default: $(TARGET)
 all: default

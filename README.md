@@ -73,8 +73,15 @@ http://www.ict.kth.se/courses/2G1520/COURSELIB/labs/AnvandbaraSysanrop.pdf
 
 ##Install instructions
 
+SIGDET is off by default.
 ```
 make
+./shell
+```
+
+In order to override SIGDET please type the following.
+```
+make CFLAGS='-D SIGDET=1'
 ./shell
 ```
 
