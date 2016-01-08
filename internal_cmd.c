@@ -9,12 +9,13 @@
 
 /* POSIX */
 #include <sys/resource.h>
+#include <glob.h>
 
 /* TODO implement the rest of this function */
 void internal_cmd_env() {
     int des_p[2];
 
-    /* Programs to run (progp1 | prog2) */
+    /* Programs to run progp1 | prog2 */
     char* prog1[] = {"printenv", NULL};
     char* prog2[] = {"sort", NULL};
 
@@ -57,30 +58,44 @@ void internal_cmd_env() {
 void internal_cmd_cd(char** tokens) {
     char* home;
     char* to;
-    to = tokens[1];
+    glob_t globbuf;
 
-    if(strcmp(to, "") == 0) {
-        home = getenv("HOME");
-        if (chdir(home)) {
-           perror(NULL);
+    to = tokens[1]; /* destination */
+
+    if(to == NULL) {
+        if((home = getenv("HOME")) == NULL) {
+            fprintf(stderr, "Error while attempting to get env variable HOME\n");
+            return;
+        }
+        if (chdir(home) == -1) {
+            perror("Could not change directory");
+            return;
         }
     }else {
-        if (chdir(to)) {
-            perror(NULL);
+        if(glob(to, GLOB_TILDE | GLOB_MARK, NULL, &globbuf) != 0) {
+            perror("Error while globbing");
+            return;
         }
+        if (chdir(globbuf.gl_pathv[0])) {
+            perror("Error while changing directory");
+            globfree(&globbuf);
+            return;
+        }
+        globfree(&globbuf);
     }
 }
 
 void internal_cmd_help() {
-    char help[] = "\
-Help!\n\
+    static char help[] = "\
 Hello and welcome to my awesome shell\n\
 This shell implements a few of the most common\n\
 utilities you will find in most modern shells.\n\n\
 exit|quit|bye - Quits the current session\n\
 help - Prints help page\n\
 env - Prints out environment variables\n\
-cd [directory] - Change directory\n";
+cd [directory] - Change directory\n\
+license - Show licese notice\n\
+version - Show software version\n";
     printf(ANSI_COLOR_CYAN "%s" ANSI_COLOR_RESET, help);
 }
 
