@@ -1,7 +1,7 @@
 TARGET = shell
 LIBS = -lreadline
-CC = gcc
-override CFLAGS += -pedantic -Wall -ansi -O3
+CC = cc
+override CFLAGS += -g -pedantic -Wall -ansi -O3
 
 .PHONY: default all clean manual
 
